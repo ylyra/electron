@@ -1,19 +1,25 @@
 import clsx from "clsx";
 import { DotsThree } from "phosphor-react";
 import { ReactNode } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 
 interface LinkProps {
   children: ReactNode;
+  to: string;
 }
 
-export function Link({ children }: LinkProps) {
+export function Link({ children, to }: LinkProps) {
   return (
     <RouterLink
-      to="/document"
-      className={clsx(
-        "flex items-center text-sm gap-2 text-rotion-100 hover:text-rotion-50 py-1 px-3 rounded group hover:bg-rotion-700"
-      )}
+      to={to}
+      className={({ isActive }) => {
+        return clsx(
+          "flex items-center text-sm gap-2 text-rotion-100 hover:text-rotion-50 py-1 px-3 rounded group hover:bg-rotion-700",
+          {
+            "bg-rotion-900": isActive,
+          }
+        );
+      }}
     >
       <span className="truncate flex-1">{children}</span>
 

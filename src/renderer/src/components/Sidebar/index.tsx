@@ -10,17 +10,10 @@ import { Search } from "./Search";
 
 export function Sidebar() {
   const isMacOS = process.platform === "darwin";
-  const { data, isError, isLoading } = useQuery(
-    ["documents"],
-    async () => {
-      const documents = await window.api.fetchDocuments();
-      return documents;
-    },
-    {
-      cacheTime: 60 * 1000,
-      staleTime: 60 * 1000,
-    }
-  );
+  const { data } = useQuery(["documents"], async () => {
+    const documents = await window.api.fetchDocuments();
+    return documents.data;
+  });
 
   return (
     <Collapsible.Content className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
@@ -54,7 +47,10 @@ export function Sidebar() {
             <Navigation.SectionTitle>Workspace</Navigation.SectionTitle>
             <Navigation.SectionContent>
               {data?.map((document) => (
-                <Navigation.Link key={document.id}>
+                <Navigation.Link
+                  to={`/document/${document.id}`}
+                  key={document.id}
+                >
                   {document.title}
                 </Navigation.Link>
               ))}

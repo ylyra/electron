@@ -4,12 +4,14 @@ import { createFileRoute, createURLRoute } from "electron-router-dom";
 import * as path from "node:path";
 
 import "./ipc";
+import "./store";
+import { store } from "./store";
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1120,
-    height: 700,
+    width: store.get("windowBounds.width"),
+    height: store.get("windowBounds.height"),
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: "hiddenInset",
