@@ -59,5 +59,6 @@ module.exports = {
       addVariant("collapsed", '&[data-state="closed"]');
     }),
     require("@tailwindcss/typography"),
+    require("tailwind-scrollbar"),
   ],
 };
