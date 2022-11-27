@@ -1,26 +1,17 @@
-import { Command } from 'cmdk'
-import { File, MagnifyingGlass } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { Command } from "cmdk";
+import { File, MagnifyingGlass } from "phosphor-react";
 
-export function SearchBar() {
-  const [open, setOpen] = useState(false)
+type Props = {
+  onToggle: (value?: boolean) => void;
+  open: boolean;
+};
 
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === 'k' && e.metaKey) {
-        setOpen((state) => !state)
-      }
-    }
-
-    document.addEventListener('keydown', down)
-    return () => document.removeEventListener('keydown', down)
-  }, [setOpen])
-
+export function SearchBar({ onToggle, open }: Props) {
   return (
     <Command.Dialog
       className="fixed top-24 left-1/2 -translate-x-1/2 w-[480px] max-w-full bg-rotion-800 rounded-md shadow-2xl text-rotion-100 border border-rotion-600"
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={onToggle}
       label="Search"
     >
       <div className="flex items-center gap-2 border-b border-rotion-700 p-4">
@@ -57,5 +48,5 @@ export function SearchBar() {
         </Command.Item>
       </Command.List>
     </Command.Dialog>
-  )
+  );
 }

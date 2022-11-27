@@ -40,8 +40,6 @@ ipcMain.handle(
     };
     store.set(`documents.${id}`, document);
 
-    console.log(document);
-
     return {
       data: document,
     };
